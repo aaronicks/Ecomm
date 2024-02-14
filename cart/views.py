@@ -7,14 +7,19 @@ from django.http import JsonResponse
 
 
 def cart_summary(request):
-    return render(request, 'cart_summary.html', {})
+
+    # get cart
+    cart = Cart(request)
+
+    cart_products = cart.get_prod
+    return render(request, 'cart_summary.html', {'cart_products':cart_products})
 
 
 def cart_add(request):
     
     # get the cart
     cart = Cart(request)
-
+    
     # test for post
     if request.POST.get('action') == 'post':
         # get some stuff
