@@ -11,6 +11,7 @@
         </header>
         <br>
         <div class="container">
+            {% if cart_products %}
             {% for product in cart_products %}
             <div class="card mb-3" >
                 <div class="row g-0">
@@ -39,13 +40,33 @@
                             ${{ product.sale_price }}
                         </div>
                         {% else %}
-                        
+                        <br>
+                        <div class="row justify-content-center">
+                            <div class="col-md-2">Quantity:</div>
+                            <div class="col-md-2">
+                              <select class="form-select form-select-sm" id="qty-cart">
+                                {% for key, value in quantities.items %}
+                                    {% if key == product.id|slugify %}
+                                        <option selected>{{ value }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                            </div>
+                          </div> 
+                        <br>
                         ${{product.price}}<br>
                         
                         {% endif %}
 
 
                       <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+                      <button class="btn btn-danger mx-3">Delete</button>
                       
                     </div>
                    </center>
@@ -54,6 +75,9 @@
               </div>
                 
             {% endfor %}
+            {% else %}
+              <h2 class="text-center text-capitalize">There is nothing in the Cart</h2>
+            {% endif %}
         </div>
         <!-- Section-->
         <br>
