@@ -3,10 +3,14 @@ from .models import Product, Category
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import SignUpForm
-import re
 
 
 # Create your views here.
+def category_summary(request):
+
+    categories = Category.objects.all()
+
+    return render(request, 'category_summary.html', {'categories':categories})
 
 def category(request, foo):
 
